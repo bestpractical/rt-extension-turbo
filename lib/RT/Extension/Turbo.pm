@@ -4,6 +4,9 @@ package RT::Extension::Turbo;
 
 our $VERSION = '0.01';
 
+RT->AddJavaScript('turbo.es2017-umd.js');
+RT->AddJavaScript('rt-extension-turbo.js');
+
 =head1 NAME
 
 RT-Extension-Turbo - Experimental extension using Turbo

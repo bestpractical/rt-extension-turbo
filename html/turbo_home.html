@@ -1,0 +1,9 @@
+<& /Elements/Header, Title => "RT at a glance" &>
+<& /Elements/Tabs &>
+<& /Elements/ListActions, actions => \@results &>
+<& /Elements/MyTurbo &>
+
+<%init>
+warn "Running turbo_home";
+my @results;
+</%init>

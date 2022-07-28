@@ -1,0 +1,3 @@
+<%init>
+RT::Interface::Web::Redirect(RT->Config->Get('WebURL')."turbo_home.html");
+</%init>
