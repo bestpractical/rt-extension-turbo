@@ -1,0 +1,25 @@
+% if ( $component_name eq 'SavedSearch' ) {
+<turbo-frame id="savedsearch-<%lc($ARGS{SavedSearch})%>">
+% $m->comp( "/Elements/ShowSearch", %ARGS );
+% } else {
+<turbo-frame id="component-<%$component_name%>">
+% $m->comp( "/Elements/$component_name" );
+% }
+</turbo-frame>
+
+<%init>
+my ($component_name) = $m->dhandler_arg;
+
+if ( $component_name eq 'SavedSearch' ) {
+    # Put Override args in the correct structure
+    $ARGS{Override} = {};
+    foreach my $override ( qw(Rows) ) {
+        if ( $ARGS{$override} ) {
+            $ARGS{Override}->{$override} = $ARGS{$override};
+            delete $ARGS{$override};
+        }
+    }
+}
+</%init>
+<%args>
+</%args>
