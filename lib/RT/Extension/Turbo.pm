@@ -45,6 +45,36 @@ Add this line:
 
 =back
 
+=head1 ToDo
+
+=over
+
+=item *
+
+Make it a user-level and global config option to switch homepages
+
+=item *
+
+Add a timer at debug level in logs per component
+
+=item *
+
+Fix issue with reloading dropdowns on refresh
+
+=item *
+
+Get forms working (Quickcreate)
+
+=item *
+
+Add auto-refresh feature per portlet
+
+=item *
+
+Add a loading icon for possible slow portlet loads
+
+=back
+
 =head1 AUTHOR
 
 Best Practical Solutions, LLC E<lt>modules@bestpractical.comE<gt>
