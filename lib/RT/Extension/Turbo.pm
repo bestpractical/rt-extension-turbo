@@ -31,6 +31,12 @@ Works with RT 5.
 
 May need root permissions
 
+=item Patch RT
+
+If you are running on RT 5.0.3 or earlier, apply the included patch:
+
+    patch -p1 -d /opt/rt5 < patches/0001-Add-callback-to-modify-content-presented-via-TitleBo.patch
+
 =item Edit your F</opt/rt4/etc/RT_SiteConfig.pm>
 
 Add this line:
@@ -71,7 +77,9 @@ Add auto-refresh feature per portlet
 
 =item *
 
-Add a loading icon for possible slow portlet loads
+Update RT to read the "collapsed" cookie setting and load titlebox
+closed if the titlebox has been hidden. Currently we load open, then
+quickly close it. This allows lazy load to work properly.
 
 =back
 

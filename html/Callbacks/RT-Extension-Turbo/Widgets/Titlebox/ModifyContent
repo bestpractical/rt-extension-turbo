@@ -1,0 +1,37 @@
+<%init>
+my $content;
+if ( $m->request_path =~ /^\/Views/ ) {
+    # Turbo refresh, send body, no titlebox
+    $m->out( $$Content );
+
+    # Set values to get TitleBox to return without sending anything more
+    $content = '';
+    $$HideEmpty = 1;
+}
+elsif ( $m->notes('SavedSearchForTitle') ) {
+    # Homepage request for a saved search, send turbo tags
+    my $name = $m->notes('SavedSearchForTitle');
+    $content .= '<turbo-frame id="savedsearch-' . lc($name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $name . '&Rows=10">';
+    $content .= '<div class="text-center"><div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div></div>';
+    $content .= '</turbo-frame>';
+    $m->notes->{'SavedSearchForTitle'} = 0;
+}
+elsif ( $m->notes('ComponentForTitle') ) {
+    # Homepage request for a mason component, send turbo tags
+    my $name = $m->notes('ComponentForTitle');
+    $content .= '<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '" loading="lazy">';
+    $content .= '<div class="text-center"><div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div></div>';
+    $content .= '</turbo-frame>';
+    $m->notes->{'ComponentForTitle'} = 0;
+}
+elsif ( $m->request_path =~ /^\/turbo_home\.html$/ ) {
+    # Homepage load that isn't a search or a component
+    $content = '';
+}
+$$Content = $content;
+</%init>
+<%args>
+$ARGSRef
+$Content => undef
+$HideEmpty
+</%args>

@@ -84,14 +84,19 @@ $show_cb = sub {
         }
         else {
             # Add turbo tags for components
-            $m->out('<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '">');
-            $m->out('</turbo-frame>');
+            $m->notes->{ComponentForTitle} = $name;
+#            $m->out('<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '" loading="lazy">');
+#            $m->comp('/Widgets/Spinner');
+$m->comp( $name, %{ $entry->{arguments} || {} } );
+#            $m->out('</turbo-frame>');
         }
     } elsif ( $type eq 'search' ) {
             # Add turbo tags for saved searches
         my ($saved_search, $search_name) = RT::Dashboard->ShowSearchName($entry);
-        $m->out('<turbo-frame id="savedsearch-' . lc($search_name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $search_name . '&Rows=' . $Rows . '">');
-        $m->out('</turbo-frame>');
+        $m->notes->{SavedSearchForTitle} = $search_name;
+#        $m->out('<turbo-frame id="savedsearch-' . lc($search_name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $search_name . '&Rows=' . $Rows . '">');
+$m->comp( '/Elements/ShowSearch', RT::Dashboard->ShowSearchName($entry), Override => { Rows => $Rows } );
+#        $m->out('</turbo-frame>');
     } elsif ( $type eq 'dashboard' ) {
         my $current_dashboard = RT::Dashboard->new($session{CurrentUser});
         my ($ok, $msg) = $current_dashboard->LoadById($entry->{id});
