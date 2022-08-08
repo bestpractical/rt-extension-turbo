@@ -32,8 +32,6 @@ INSTALLATION
 ToDo
     *   Make it a user-level and global config option to switch homepages
 
-    *   Add a timer at debug level in logs per component
-
     *   Get forms working (Quickcreate)
 
     *   Add auto-refresh feature per portlet

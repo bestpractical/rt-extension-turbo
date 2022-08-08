@@ -1,8 +1,13 @@
 <%init>
+my $path = $m->request_path;
+if ( $ARGS{'SavedSearch'} ) {
+    $path .= ' (' . $ARGS{'SavedSearch'} . ') ';
+}
 
 # The only thing after this callback is the default RT footer
 # Abort here for Views requests to avoid outputting the footer
 if ( $m->request_path =~ /^\/Views/ ) {
+    # RT->Logger->debug('Time to render: ' . $path . ' }}} ' . Time::HiRes::tv_interval( $m->{'rt_base_time'} ));
     $m->abort;
 }
 </%init>

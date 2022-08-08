@@ -61,10 +61,6 @@ Make it a user-level and global config option to switch homepages
 
 =item *
 
-Add a timer at debug level in logs per component
-
-=item *
-
 Get forms working (Quickcreate)
 
 =item *
