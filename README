@@ -34,8 +34,6 @@ ToDo
 
     *   Add a timer at debug level in logs per component
 
-    *   Fix issue with reloading dropdowns on refresh
-
     *   Get forms working (Quickcreate)
 
     *   Add auto-refresh feature per portlet

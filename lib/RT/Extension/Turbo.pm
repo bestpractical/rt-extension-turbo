@@ -65,10 +65,6 @@ Add a timer at debug level in logs per component
 
 =item *
 
-Fix issue with reloading dropdowns on refresh
-
-=item *
-
 Get forms working (Quickcreate)
 
 =item *
