@@ -12,7 +12,7 @@ if ( $m->request_path =~ /^\/Views/ ) {
 elsif ( $m->notes('SavedSearchForTitle') ) {
     # Homepage request for a saved search, send turbo tags
     my $name = $m->notes('SavedSearchForTitle');
-    $content .= '<turbo-frame id="savedsearch-' . lc($name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $name . '&Rows=10">';
+    $content .= '<turbo-frame id="savedsearch-' . lc($name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $name . '&Rows=10" target="_top">';
     $content .= '<div class="text-center"><div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div></div>';
     $content .= '</turbo-frame>';
     $m->notes->{'SavedSearchForTitle'} = 0;
@@ -20,7 +20,7 @@ elsif ( $m->notes('SavedSearchForTitle') ) {
 elsif ( $m->notes('ComponentForTitle') ) {
     # Homepage request for a mason component, send turbo tags
     my $name = $m->notes('ComponentForTitle');
-    $content .= '<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '" loading="lazy">';
+    $content .= '<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '" loading="lazy" target="_top">';
     $content .= '<div class="text-center"><div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div></div>';
     $content .= '</turbo-frame>';
     $m->notes->{'ComponentForTitle'} = 0;
