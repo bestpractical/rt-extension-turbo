@@ -1,19 +1,18 @@
+% $m->callback( ARGSRef => \%ARGS, CallbackName => 'BeforeTable' );
 <div class="myrt row">
+
 <div class="<% 'boxcontainer col-md-' . ( $sidebar ? '8' : '12' ) %>">
-% foreach my $entry ( @$body ) {
-%   $show_cb->($entry);
-% }
+% $show_cb->($_) foreach @$body;
 </div>
 
 % if ( $sidebar ) {
 <div class="boxcontainer col-md-4">
-% foreach my $entry ( @$sidebar ) {
-%   $show_cb->($entry);
-% }
+% $show_cb->($_) foreach @$sidebar;
 </div>
 % }
-</div>
 
+</div>
+% $m->callback( ARGSRef => \%ARGS, CallbackName => 'AfterTable' );
 <%init>
 # All lifted from MyRT in core RT
 my %allowed_components = map {$_ => 1} @{RT->Config->Get('HomepageComponents')};
@@ -85,18 +84,13 @@ $show_cb = sub {
         else {
             # Add turbo tags for components
             $m->notes->{ComponentForTitle} = $name;
-#            $m->out('<turbo-frame id="component-' . lc($name) . '" src="/Views/Component/' . $name . '" loading="lazy">');
-#            $m->comp('/Widgets/Spinner');
-$m->comp( $name, %{ $entry->{arguments} || {} } );
-#            $m->out('</turbo-frame>');
+            $m->comp( $name, %{ $entry->{arguments} || {} } );
         }
     } elsif ( $type eq 'search' ) {
             # Add turbo tags for saved searches
         my ($saved_search, $search_name) = RT::Dashboard->ShowSearchName($entry);
         $m->notes->{SavedSearchForTitle} = $search_name;
-#        $m->out('<turbo-frame id="savedsearch-' . lc($search_name) . '" src="/Views/Component/SavedSearch?SavedSearch=' . $search_name . '&Rows=' . $Rows . '">');
-$m->comp( '/Elements/ShowSearch', RT::Dashboard->ShowSearchName($entry), Override => { Rows => $Rows } );
-#        $m->out('</turbo-frame>');
+        $m->comp( '/Elements/ShowSearch', RT::Dashboard->ShowSearchName($entry), Override => { Rows => $Rows } );
     } elsif ( $type eq 'dashboard' ) {
         my $current_dashboard = RT::Dashboard->new($session{CurrentUser});
         my ($ok, $msg) = $current_dashboard->LoadById($entry->{id});
