@@ -73,6 +73,11 @@ Update RT to read the "collapsed" cookie setting and load titlebox
 closed if the titlebox has been hidden. Currently we load open, then
 quickly close it. This allows lazy load to work properly.
 
+=item *
+
+Remove hard-coded Rows argument from Saved Searches. This should be loaded
+from the Saved Search configuration.
+
 =back
 
 =head1 AUTHOR
