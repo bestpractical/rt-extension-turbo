@@ -1,5 +1,6 @@
 <%init>
 my $content;
+my $change_content = 1;
 if ( $m->request_path =~ /^\/Views/ ) {
     # Turbo refresh, send body, no titlebox
     $m->out( $$Content );
@@ -28,7 +29,14 @@ elsif ( $m->request_path =~ /^\/turbo_home\.html$/ ) {
     # Homepage load that isn't a search or a component
     $content = '';
 }
-$$Content = $content;
+else {
+    # Regular request, don't change anything
+    $change_content = 0;
+}
+
+if ( $change_content ) {
+    $$Content = $content;
+}
 </%init>
 <%args>
 $ARGSRef
